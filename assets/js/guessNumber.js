@@ -9,31 +9,32 @@ console.log(`Secret is: ${secret}`);
 let button = document.getElementById('check-button');
 
 button.addEventListener('click', function (event){
-    
     let guessSecret = parseInt(document.getElementById('input-number').value, 10);
-
-    if (Number.isInteger(guessSecret) == true && secret == guessSecret) {
-        console.log(`You did guess the secret number: ${secret}`);
-        document.getElementById("message").innerHTML=`Congratulations!! <br> You did guess the secret number: <strong>${secret}</strong>!`;
-        document.getElementById("input-number").placeholder=`${guessSecret}`;
-        document.getElementById("input-number").value=null;
-    } else if (Number.isInteger(guessSecret) == true && secret > guessSecret){
-        console.log("You didn`t guess the secret number. Secret number is higher");
-        document.getElementById("message").innerHTML=`You didn't guess the secret number. Secret number is <strong>higher<strong>!`;
-        document.getElementById("input-number").placeholder=`${guessSecret}`;
-        document.getElementById("input-number").value=null;
-    } else if (Number.isInteger(guessSecret) == true && secret < guessSecret){
-        console.log("You didn`t guess the secret number. Secret number is lower");
-        document.getElementById("message").innerHTML=`You didn't guess the secret number. Secret number is <strong>lower<strong>!`;
-        document.getElementById("input-number").placeholder=`${guessSecret}`;
-        document.getElementById("input-number").value=null;
-    } else {
-        console.log("You didn`t enter a number. Something went wrong");
-        document.getElementById("message").innerHTML=`You didn't enter a number. Something went wrong!`;
-        document.getElementById("input-number").placeholder=`Insert a number`;
-        document.getElementById("input-number").value=null;
+    if (Number.isInteger(guessSecret) == false) {
+        var notNumberMessage = `You didn't enter a number. Something went wrong`;
+        var notNumberPlaceholder = `Insert a number`;
+        response(notNumberMessage, notNumberPlaceholder);
+    }else {
+        if (secret == guessSecret) {
+            var guessedMessage = `Congratulations!! <br> You did guess the secret number: <strong>${secret}</strong>!`;
+            var guessedPlaceholder = guessSecret;
+            response(guessedMessage, guessedPlaceholder);
+        } else if (secret > guessSecret){
+            var higherMessage = `You didn't guess the secret number. Secret number is <strong>higher<strong>!`;
+            var higherPlaceholder = guessSecret;
+            response(higherMessage, higherPlaceholder);
+        } else if (secret < guessSecret){
+            var lowerMessage = `You didn't guess the secret number. Secret number is <strong>lower<strong>!`;
+            var lowerPlaceholder = guessSecret;
+            response(lowerMessage, lowerPlaceholder);
+        }
     }
 });
 
 
-
+function response(message, placeholder) {
+    console.log(message);
+    document.getElementById("message").innerHTML=message;
+    document.getElementById("input-number").placeholder=placeholder;
+    document.getElementById("input-number").value=null;
+}
