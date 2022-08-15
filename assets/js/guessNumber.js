@@ -3,8 +3,6 @@ function randomNumber(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 } 
 
-let secret = randomNumber(1, 100);
-console.log(`Secret is: ${secret}`);
 
 function makeResponse(message, placeholder) {
     console.log(message);
@@ -14,6 +12,9 @@ function makeResponse(message, placeholder) {
     dom.getElementById("input-number").value=null;
 }
 
+
+let secret = randomNumber(1, 100);
+console.log(`Secret is: ${secret}`);
 
 let button = document.getElementById('check-button');
 
